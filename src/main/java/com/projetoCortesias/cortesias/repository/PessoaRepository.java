@@ -12,9 +12,9 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
     Optional<Pessoa> findByCpf(String cpf);
 
     @Query("SELECT p FROM Pessoa p WHERE " +
-            "(:nome IS NULL OR LOWER(p.nome) LIKE LOWER(CONCAT('%', :nome, '%'))) AND " +
-            "(:cidade IS NULL OR LOWER(p.cidade) LIKE LOWER(CONCAT('%', :cidade, '%'))) AND " +
-            "(:cpf IS NULL OR p.cpf LIKE CONCAT('%', :cpf, '%'))")
+            "(:nome IS NULL OR p.nome ILIKE %:nome%) AND " +
+            "(:cidade IS NULL OR p.cidade ILIKE %:cidade%) AND " +
+            "(:cpf IS NULL OR p.cpf LIKE %:cpf%)")
     List<Pessoa> buscarComFiltros(@Param("nome") String nome,
                                   @Param("cidade") String cidade,
                                   @Param("cpf") String cpf);
