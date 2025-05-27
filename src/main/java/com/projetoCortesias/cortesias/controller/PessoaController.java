@@ -19,21 +19,11 @@ public class PessoaController {
     private final PessoaRepository pessoaRepository;
 
     @PostMapping
-    public ResponseEntity<?> cadastrarPessoa(@RequestBody PessoaDTO dto) {
-        if (pessoaRepository.findByCpf(dto.getCpf()).isPresent()) {
-            return ResponseEntity.badRequest().body("CPF já cadastrado para outra pessoa");
+    public ResponseEntity<?> cadastrar(@RequestBody Pessoa p) {
+        if (pessoaRepository.findByCpf(p.getCpf()).isPresent()) {
+            return ResponseEntity.badRequest().body("CPF já cadastrado");
         }
-
-        Pessoa pessoa = new Pessoa();
-        pessoa.setNome(dto.getNome());
-        pessoa.setCpf(dto.getCpf());
-        pessoa.setDataNascimento(dto.getDataNascimento());
-        pessoa.setCidade(dto.getCidade());
-        pessoa.setTelefone(dto.getTelefone());
-        pessoa.setEmail(dto.getEmail());
-
-        Pessoa salva = pessoaRepository.save(pessoa);
-        return ResponseEntity.status(HttpStatus.CREATED).body(salva);
+        return ResponseEntity.status(HttpStatus.CREATED).body(pessoaRepository.save(p));
     }
 
     @GetMapping

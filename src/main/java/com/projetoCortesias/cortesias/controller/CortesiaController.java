@@ -22,16 +22,6 @@ public class CortesiaController {
     private final CortesiaService cortesiaService;
     private final CortesiaRepository cortesiaRepository;
 
-//    @PostMapping("/evento/{eventoId}/solicitar")
-//    public ResponseEntity<String> solicitar(@PathVariable Long eventoId, @RequestParam String cpf) {
-//        try {
-//            String codigo = cortesiaService.solicitarCortesia(eventoId, cpf);
-//            return ResponseEntity.ok("Cortesia concedida. Código: " + codigo);
-//        } catch (RuntimeException e) {
-//            return ResponseEntity.badRequest().body(e.getMessage());
-//        }
-//    }
-
     @PostMapping("/solicitar")
     public ResponseEntity<String> solicitar(@RequestBody CortesiaSolicitacaoDTO dto) {
         try {

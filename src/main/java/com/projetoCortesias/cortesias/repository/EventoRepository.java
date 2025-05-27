@@ -19,4 +19,6 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
                                   @Param("data") LocalDate data,
                                   @Param("local") String local,
                                   @Param("responsavel") String responsavel);
+
+    boolean existsByDataAndResponsavel(LocalDate data, String responsavel);
 }

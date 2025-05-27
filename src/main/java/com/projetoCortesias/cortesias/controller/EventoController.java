@@ -22,13 +22,14 @@ public class EventoController {
     private final EventoRepository eventoRepository;
 
     @PostMapping
-    public ResponseEntity<Evento> criarEvento(@RequestBody EventoDTO dto) {
-        Evento evento = new Evento();
-        evento.setNome(dto.getNome());
-        evento.setData(dto.getData());
-        evento.setLocal(dto.getLocal());
-        evento.setResponsavel(dto.getResponsavel());
-        evento.setQuantidadeCortesias(dto.getQuantidadeCortesias());
+    public ResponseEntity<?> criar(@RequestBody Evento evento) {
+        if (evento.getQuantidadeCortesias() < 0) {
+            return ResponseEntity.badRequest().body("Quantidade de cortesias não pode ser negativa");
+        }
+
+        if (eventoRepository.existsByDataAndResponsavel(evento.getData(), evento.getResponsavel())) {
+            return ResponseEntity.badRequest().body("Já existe evento nesta data para este responsável");
+        }
 
         Evento salvo = eventoRepository.save(evento);
         return ResponseEntity.status(HttpStatus.CREATED).body(salvo);
