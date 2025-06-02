@@ -3,7 +3,7 @@ package com.projetoCortesias.cortesias.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Data
@@ -15,7 +15,8 @@ public class Evento {
     private Long id;
 
     private String nome;
-    private LocalDate data;
+    private Date dataInicio;
+    private Date dataFim;
     private String local;
     private String responsavel;
     private Integer quantidadeCortesias;
