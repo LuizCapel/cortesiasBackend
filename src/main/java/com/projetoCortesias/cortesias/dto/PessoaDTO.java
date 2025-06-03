@@ -14,5 +14,4 @@ public class PessoaDTO {
     private String telefone;
     private String email;
 
-    // Getters e setters
 }

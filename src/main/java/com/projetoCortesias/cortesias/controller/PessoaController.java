@@ -63,4 +63,11 @@ public class PessoaController {
         pessoaRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/cpf/{cpf}")
+    public ResponseEntity<?> buscarPorCpf(@PathVariable String cpf) {
+        return pessoaRepository.findByCpf(cpf)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 }

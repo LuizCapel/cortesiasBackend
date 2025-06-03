@@ -16,8 +16,10 @@ public class Pessoa {
 
     private String nome;
     private LocalDate dataNascimento;
+
     @Column(unique = true)
     private String cpf;
+
     private String cidade;
     private String telefone;
     private String email;

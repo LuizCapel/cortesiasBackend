@@ -23,12 +23,6 @@ public class AuthController {
     private final PasswordEncoder encoder;
     private final UsuarioRepository usuarioRepository;
 
-//    @PostMapping("/login")
-//    public ResponseEntity<?> login(@RequestBody LoginRequest req) {
-//        authManager.authenticate(new UsernamePasswordAuthenticationToken(req.getEmail(), req.getSenha()));
-//        var token = jwtUtil.generateToken(req.getEmail());
-//        return ResponseEntity.ok(new TokenResponse(token));
-//    }
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest req) {
         authManager.authenticate(new UsernamePasswordAuthenticationToken(req.getEmail(), req.getSenha()));

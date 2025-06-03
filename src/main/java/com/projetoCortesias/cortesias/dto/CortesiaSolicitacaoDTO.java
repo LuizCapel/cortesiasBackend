@@ -9,5 +9,5 @@ public class CortesiaSolicitacaoDTO {
     private Long eventoId;
     private String cpf;
 
-    // Getters e setters
+
 }

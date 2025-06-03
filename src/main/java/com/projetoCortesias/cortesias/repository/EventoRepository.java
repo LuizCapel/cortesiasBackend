@@ -12,18 +12,8 @@ import java.util.List;
 
 public interface EventoRepository extends JpaRepository<Evento, Long> {
 
-//    @Query("SELECT e FROM Evento e WHERE " +
-//            "(:nome IS NULL OR e.nome ILIKE %:nome%) AND " +
-//            "(:data IS NULL OR (e.dataInicio <= :data AND e.dataFim >= :data)) AND " +
-//            "(:local IS NULL OR e.local ILIKE %:local%) AND " +
-//            "(:responsavel IS NULL OR e.responsavel ILIKE %:responsavel%)")
-//    List<Evento> buscarComFiltros(@Param("nome") String nome,
-//                                  @Param("data") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate data,
-//                                  @Param("local") String local,
-//                                  @Param("responsavel") String responsavel);
     List<Evento> findAll();
 
-//    boolean existsByDataAndResponsavel(Date data, String responsavel);
     boolean existsByResponsavelAndDataInicioLessThanEqualAndDataFimGreaterThanEqual(
             String responsavel, Date novaDataFim, Date novaDataInicio);
 

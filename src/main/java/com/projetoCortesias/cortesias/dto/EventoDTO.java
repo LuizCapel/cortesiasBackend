@@ -12,11 +12,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class EventoDTO {
     private String nome;
 
-//    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date dataInicio;
 
-//    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date dataFim;
 
@@ -24,5 +22,4 @@ public class EventoDTO {
     private String responsavel;
     private int quantidadeCortesias;
 
-    // Getters e setters
 }

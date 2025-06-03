@@ -3,7 +3,6 @@ package com.projetoCortesias.cortesias.controller;
 import com.projetoCortesias.cortesias.dto.CortesiaDTO;
 import com.projetoCortesias.cortesias.dto.CortesiaSolicitacaoDTO;
 import com.projetoCortesias.cortesias.model.Cortesia;
-import com.projetoCortesias.cortesias.model.Pessoa;
 import com.projetoCortesias.cortesias.repository.CortesiaRepository;
 import com.projetoCortesias.cortesias.service.CortesiaService;
 import lombok.RequiredArgsConstructor;

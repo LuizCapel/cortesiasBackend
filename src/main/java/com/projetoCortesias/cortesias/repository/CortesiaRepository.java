@@ -13,4 +13,6 @@ public interface CortesiaRepository extends JpaRepository<Cortesia, Long> {
 
     List<Cortesia> findByEventoId(Long eventoId);
     List<Cortesia> findByEventoIdAndResgatada(Long eventoId, Boolean resgatada);
+
+    boolean existsByEventoIdAndPessoaId(Long eventoId, Long id);
 }

@@ -10,5 +10,5 @@ public class CortesiaDTO {
     private boolean resgatada;
     private String pessoaNome;
     private String pessoaCpf;
-    // Getters e setters
+
 }

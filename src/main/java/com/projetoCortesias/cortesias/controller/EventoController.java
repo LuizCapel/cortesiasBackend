@@ -52,7 +52,7 @@ public class EventoController {
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date data,
             @RequestParam(required = false) String local,
             @RequestParam(required = false) String responsavel) {
-//        return ResponseEntity.ok(eventoRepository.buscarComFiltros(nome, data, local, responsavel));
+
         List<Evento> eventos = eventoRepository.findAll();
 
         List<Evento> filtrados = eventos.stream()
