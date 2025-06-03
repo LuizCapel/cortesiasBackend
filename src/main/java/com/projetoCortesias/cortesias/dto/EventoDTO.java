@@ -2,6 +2,7 @@ package com.projetoCortesias.cortesias.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -11,10 +12,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class EventoDTO {
     private String nome;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+//    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date dataInicio;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+//    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date dataFim;
 
     private String local;
