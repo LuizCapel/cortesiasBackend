@@ -60,6 +60,7 @@ public class CortesiaController {
             dto.setResgatada(c.isResgatada());
             dto.setPessoaNome(c.getPessoa().getNome());
             dto.setPessoaCpf(c.getPessoa().getCpf());
+            dto.setDataSolicitacao(c.getDataSolicitacao());
             return dto;
         }).collect(Collectors.toList());
 
