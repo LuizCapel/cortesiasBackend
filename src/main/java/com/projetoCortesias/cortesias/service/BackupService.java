@@ -9,7 +9,8 @@ import com.projetoCortesias.cortesias.repository.CortesiaRepository;
 import com.projetoCortesias.cortesias.repository.EventoRepository;
 import com.projetoCortesias.cortesias.repository.PessoaRepository;
 import com.projetoCortesias.cortesias.repository.UsuarioRepository;
-import jakarta.annotation.PostConstruct;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -18,8 +19,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -86,6 +85,41 @@ public class BackupService {
                         c.getDataSolicitacao(),
                         c.isResgatada()));
             }
+
+            writer.write("\n===== INSERTS =====\n");
+
+            for (Evento e : eventos) {
+                writer.write(String.format(
+                        "INSERT INTO evento (id, nome, data_inicio, data_fim, local, quantidade_cortesias) VALUES (%d, '%s', '%s', '%s', '%s', %d);\n",
+                        e.getId(), e.getNome(), e.getDataInicio(), e.getDataFim(), e.getLocal(), e.getQuantidadeCortesias()));
+            }
+
+            for (Pessoa p : pessoas) {
+                writer.write(String.format(
+                        "INSERT INTO pessoa (id, nome, data_nascimento, cpf, cidade, telefone, email) VALUES (%d, '%s', '%s', '%s', '%s', '%s', '%s');\n",
+                        p.getId(), p.getNome(), p.getDataNascimento(), p.getCpf(), p.getCidade(), p.getTelefone(), p.getEmail()));
+            }
+
+            for (Usuario u : usuarios) {
+                writer.write(String.format(
+                        "INSERT INTO usuario (id, nome, email, senha) VALUES (%d, '%s', '%s', '[SENHA_OMITIDA]');\n",
+                        u.getId(), u.getNome(), u.getEmail()));
+                for (var perm : u.getPermissoes()) {
+                    writer.write(String.format(
+                            "INSERT INTO usuario_permissoes (usuario_id, permissoes) VALUES (%d, '%s');\n",
+                            u.getId(), perm.name()));
+                }
+            }
+
+            for (Cortesia c : cortesias) {
+                writer.write(String.format(
+                        "INSERT INTO cortesia (id, evento_id, pessoa_id, data_solicitacao, resgatada) VALUES (%d, %d, %d, '%s', %b);\n",
+                        c.getId(),
+                        c.getEvento() != null ? c.getEvento().getId() : null,
+                        c.getPessoa() != null ? c.getPessoa().getId() : null,
+                        c.getDataSolicitacao(),
+                        c.isResgatada()));
+            }
         }
         return file;
     }
@@ -96,7 +130,7 @@ public class BackupService {
 
         helper.setTo("lascapel@uem.br");
         helper.setSubject("Backup Diário do Sistema de Cortesias");
-        helper.setText("Segue em anexo o backup diário do banco de dados.");
+        helper.setText("Segue em anexo o backup diário do banco de dados com dados e INSERTs.");
 
         FileSystemResource fileResource = new FileSystemResource(file);
         helper.addAttachment("backup.txt", fileResource);
