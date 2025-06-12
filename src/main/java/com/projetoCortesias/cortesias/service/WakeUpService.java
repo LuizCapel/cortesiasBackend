@@ -17,7 +17,7 @@ public class WakeUpService {
     private static final String PING_URL = "https://exclusive-krista-luizcapel-78430027.koyeb.app/api/ping";
 //    private static final String PING_URL = "http://localhost:8080/api/ping";
 
-    @Scheduled(fixedDelay = 30 * 60 * 1000) // a cada 30 minutos
+//    @Scheduled(fixedDelay = 5 * 60 * 1000) // a cada 30 minutos
     public void manterServidorAtivo() {
         try {
             LOG.info("Mantendo ativo");

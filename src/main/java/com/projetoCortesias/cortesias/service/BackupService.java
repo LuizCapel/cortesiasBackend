@@ -41,7 +41,6 @@ public class BackupService {
     private JavaMailSender mailSender;
 
     @Scheduled(cron = "0 0 2 * * *") // diariamente às 2h da manhã
-//    @Scheduled(cron = "0 * * ? * *") // a cada 1 minuto (testes)
     public void gerarEEnviarBackup() throws IOException, MessagingException {
         File backup = gerarArquivoBackup();
         enviarEmailComBackup(backup);
