@@ -14,6 +14,9 @@ public class Evento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+//    @Column(unique = true)
+//    private String codigoAcesso;
+
     private String nome;
     private Date dataInicio;
     private Date dataFim;

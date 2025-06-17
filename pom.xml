@@ -103,6 +103,12 @@
 			<version>3.5.2</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20240303</version> <!-- versão mais recente até jun/2025 -->
+		</dependency>
+
 	</dependencies>
 
 	<build>

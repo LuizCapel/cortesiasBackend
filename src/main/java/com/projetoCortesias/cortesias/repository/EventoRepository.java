@@ -14,6 +14,9 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
 
     List<Evento> findAll();
 
+    @Query("SELECT e FROM Evento e WHERE e.dataInicio BETWEEN :inicio AND :fim or e.dataFim BETWEEN :inicio AND :fim or :inicio between e.dataInicio and e.dataFim")
+    List<Evento> findByDataEventoBetween(@Param("inicio") Date inicio, @Param("fim") Date fim);
+
     boolean existsByResponsavelAndDataInicioLessThanEqualAndDataFimGreaterThanEqual(
             String responsavel, Date novaDataFim, Date novaDataInicio);
 

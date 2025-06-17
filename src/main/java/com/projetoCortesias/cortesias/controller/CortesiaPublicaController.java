@@ -1,6 +1,8 @@
 
 package com.projetoCortesias.cortesias.controller;
 
+import com.projetoCortesias.cortesias.dto.Coordenada;
+import com.projetoCortesias.cortesias.dto.FoodtruckDTO;
 import com.projetoCortesias.cortesias.dto.PessoaDTO;
 import com.projetoCortesias.cortesias.model.Cortesia;
 import com.projetoCortesias.cortesias.model.Evento;
@@ -8,14 +10,21 @@ import com.projetoCortesias.cortesias.model.Pessoa;
 import com.projetoCortesias.cortesias.repository.CortesiaRepository;
 import com.projetoCortesias.cortesias.repository.EventoRepository;
 import com.projetoCortesias.cortesias.repository.PessoaRepository;
+import com.projetoCortesias.cortesias.service.CoordenadasService;
 import com.projetoCortesias.cortesias.service.CortesiaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/cortesias/publico")
@@ -72,4 +81,5 @@ public class CortesiaPublicaController {
         String codigo = cortesiaService.solicitarCortesia(eventoId, pessoa.getCpf());
         return ResponseEntity.ok("Cortesia concedida. Código: " + codigo);
     }
+
 }

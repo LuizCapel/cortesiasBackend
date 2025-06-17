@@ -12,12 +12,27 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("*") // ou especifique: "http://seu-front.com"
-                .allowedMethods("*")
-                .allowedHeaders("*");
+//    @Override
+//    public void addCorsMappings(CorsRegistry registry) {
+//        registry.addMapping("/**")
+//                .allowedOrigins("*") // ou especifique: "http://seu-front.com"
+//                .allowedMethods("*")
+//                .allowedHeaders("*");
+//    }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/api/**") // Garanta que esse path está certo
+//                        .allowedOrigins("http://localhost:8080")
+                        .allowedOrigins("https://luizcapel.github.io/cortesias")
+                        .allowedMethods("*")
+                        .allowedHeaders("*")
+                        .allowCredentials(true);
+            }
+        };
     }
 
 //    @RestController
