@@ -28,7 +28,8 @@ public class EventoController {
             return ResponseEntity.badRequest().body("Quantidade de cortesias não pode ser negativa");
         }
 
-        if (eventoRepository.existsByResponsavelAndDataInicioLessThanEqualAndDataFimGreaterThanEqual(evento.getResponsavel(), evento.getDataFim(), evento.getDataInicio())) {
+//        if (eventoRepository.existsByResponsavelAndDataInicioLessThanEqualAndDataFimGreaterThanEqual(evento.getResponsavel(), evento.getDataFim(), evento.getDataInicio())) {
+        if (eventoRepository.existsByNomeAndDataInicioLessThanEqualAndDataFimGreaterThanEqual(evento.getNome(), evento.getDataFim(), evento.getDataInicio())) {
             return ResponseEntity.badRequest().body("Já existe um evento para este responsável nesse período.");
         }
 
@@ -72,7 +73,7 @@ public class EventoController {
         Evento e = eventoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Evento não encontrado"));
 
-        if (eventoRepository.existeEventoSobreposto(id, dto.getResponsavel(), dto.getDataInicio(), dto.getDataFim())) {
+        if (eventoRepository.existeEventoSobreposto(id, dto.getNome(), dto.getDataInicio(), dto.getDataFim())) {
             return ResponseEntity.badRequest().body("Já existe um evento para este responsável nesse período.");
         }
 

@@ -17,16 +17,29 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
     @Query("SELECT e FROM Evento e WHERE e.dataInicio BETWEEN :inicio AND :fim or e.dataFim BETWEEN :inicio AND :fim or :inicio between e.dataInicio and e.dataFim")
     List<Evento> findByDataEventoBetween(@Param("inicio") Date inicio, @Param("fim") Date fim);
 
-    boolean existsByResponsavelAndDataInicioLessThanEqualAndDataFimGreaterThanEqual(
-            String responsavel, Date novaDataFim, Date novaDataInicio);
+//    boolean existsByResponsavelAndDataInicioLessThanEqualAndDataFimGreaterThanEqual(
+//            String responsavel, Date novaDataFim, Date novaDataInicio);
+
+    boolean existsByNomeAndDataInicioLessThanEqualAndDataFimGreaterThanEqual(
+            String nome, Date novaDataFim, Date novaDataInicio);
+
+//    @Query("SELECT COUNT(e) > 0 FROM Evento e WHERE " +
+//            "e.responsavel = :responsavel AND " +
+//            "e.id <> :id AND " +
+//            "e.dataInicio <= :novaDataFim AND " +
+//            "e.dataFim >= :novaDataInicio")
+//    boolean existeEventoSobreposto(@Param("id") Long id,
+//                                   @Param("responsavel") String responsavel,
+//                                   @Param("novaDataInicio") Date novaDataInicio,
+//                                   @Param("novaDataFim") Date novaDataFim);
 
     @Query("SELECT COUNT(e) > 0 FROM Evento e WHERE " +
-            "e.responsavel = :responsavel AND " +
+            "e.nome = :nome AND " +
             "e.id <> :id AND " +
             "e.dataInicio <= :novaDataFim AND " +
             "e.dataFim >= :novaDataInicio")
     boolean existeEventoSobreposto(@Param("id") Long id,
-                                   @Param("responsavel") String responsavel,
+                                   @Param("nome") String nome,
                                    @Param("novaDataInicio") Date novaDataInicio,
                                    @Param("novaDataFim") Date novaDataFim);
 }

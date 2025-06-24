@@ -4,6 +4,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 /src/main/resources/application-local.properties
+/data/my_h2_db.mv.db
+/data/my_h2_db.trace.db
 
 ### STS ###
 .apt_generated
